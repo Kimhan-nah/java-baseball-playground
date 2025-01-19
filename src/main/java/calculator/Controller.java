@@ -1,12 +1,17 @@
 package calculator;
 
-import java.util.LinkedList;
 import java.util.Queue;
 
 public class Controller {
-    private Queue<String> operators = new LinkedList<>();
-    private Queue<Integer> numbers = new LinkedList<>();
-    private Calculator calculator = new CalculatorImpl();
+    private final Queue<String> operators;
+    private final Queue<Integer> numbers;
+    private final Calculator calculator;
+
+    public Controller(Queue<String> operators, Queue<Integer> numbers, Calculator calculator) {
+        this.operators = operators;
+        this.numbers = numbers;
+        this.calculator = calculator;
+    }
 
     void parse(String[] values) {
         for (int i = 0; i < values.length; ++i) {
