@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
     @Test
@@ -34,5 +35,21 @@ public class StringTest {
         String given = "(1,2)";
         String substring = given.substring(1, given.length() - 1);
         assertThat(substring).isEqualTo("1,2");
+    }
+
+    @Test
+    @DisplayName("\"abc\".charAt(2)는 'c'를 반환한다.")
+    void test4() {
+        String given = "abc";
+        char actual = given.charAt(2);
+        assertThat(actual).isEqualTo('c');
+    }
+
+    @Test
+    @DisplayName("\"abc\".chatAt(3)은 StringIndexOutOfBoundsException이 발생한다.")
+    void test5() {
+        assertThatThrownBy(() -> {
+            "abc".charAt(3);
+        }).isInstanceOf(StringIndexOutOfBoundsException.class);
     }
 }
