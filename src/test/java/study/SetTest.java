@@ -35,4 +35,11 @@ public class SetTest {
     void test2(int input) {
         assertThat(numbers.contains(input)).isTrue();
     }
+
+    @DisplayName("number에 값이 없을 경우, contains는 false를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {4, 5, 6})
+    void test3(int input) {
+        assertThat(numbers.contains(input)).isFalse();
+    }
 }
