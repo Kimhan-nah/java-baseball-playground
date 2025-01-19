@@ -27,4 +27,12 @@ public class StringTest {
         String[] actual = "1".split(",");
         assertThat(actual).containsExactly("1");
     }
+
+    @Test
+    @DisplayName("\"(1,2)\".substring()으로 \"1,2\"를 반환하도록 한다.")
+    void test3() {
+        String given = "(1,2)";
+        String substring = given.substring(1, given.length() - 1);
+        assertThat(substring).isEqualTo("1,2");
+    }
 }
