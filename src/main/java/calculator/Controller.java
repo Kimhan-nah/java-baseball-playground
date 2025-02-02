@@ -1,51 +1,38 @@
 package calculator;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Controller {
-    private final Queue<String> operators;
-    private final Queue<Integer> numbers;
+    private final String[] tokens;
     private final Calculator calculator;
+    private final Queue<Character> operators;
+    private final Queue<Integer> numbers;
 
-    public Controller(Queue<String> operators, Queue<Integer> numbers, Calculator calculator) {
-        this.operators = operators;
-        this.numbers = numbers;
+    public Controller(String[] tokens, Calculator calculator) {
+        this.tokens = tokens;
         this.calculator = calculator;
+        this.operators = new LinkedList<>();
+        this.numbers = new LinkedList<>();
     }
 
-    void parse(String[] values) {
-        for (int i = 0; i < values.length; ++i) {
+    public void run() {
+        // todo validation
+        parse(tokens);
+        int result = calculator.calculate(numbers, operators);
+        System.out.println("result : " + result);
+    }
+
+    private void parse(String[] tokens) {
+        for (int i = 0; i < tokens.length; ++i) {
             if (i % 2 == 0) {
-                numbers.add(Integer.parseInt(values[i]));
-            } else {
-                operators.add(values[i]);
+                int number = Integer.parseInt(tokens[i]);
+                numbers.offer(number);
+                continue;
             }
+            char operator = tokens[i].charAt(0);
+            operators.offer(operator);
         }
     }
 
-    void run() {
-        int result = numbers.poll();
-
-        while (!numbers.isEmpty() && !operators.isEmpty()) {
-            String operator = operators.poll();
-            int number = numbers.poll();
-            result = calculate(result, number, operator);
-        }
-
-        System.out.println(result);
-    }
-
-    int calculate(int a, int b, String operator) {
-        switch (operator) {
-            case "+":
-                return calculator.add(a, b);
-            case "-":
-                return calculator.subtract(a, b);
-            case "*":
-                return calculator.multiply(a, b);
-            case "/":
-                return calculator.divide(a, b);
-        }
-        return 0;
-    }
 }
