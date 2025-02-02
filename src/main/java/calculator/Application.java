@@ -22,3 +22,11 @@ public class Application {
         }
     }
 }
+
+/**
+ * todo
+ * 1. validation check
+ * 2. input parser
+ * 3. operation strategy pattern 적용
+ * 4. numbers, operators 직접 전달 -> value object로 전달하기
+ */
