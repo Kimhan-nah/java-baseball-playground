@@ -1,6 +1,6 @@
 package baseball;
 
-public class InputValidator {
+public class InputValidator extends Validator {
     public boolean checkInput(String input, int length) {
         boolean[] used = new boolean[10];
 
@@ -15,7 +15,6 @@ public class InputValidator {
         }
 
         // 사용중인 숫자 갯수 확인
-        return Validator.checkLength(used, length);
+        return checkLength(used, length);
     }
-
 }
